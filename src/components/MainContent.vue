@@ -58,7 +58,7 @@ export default {
           this.genderFinded.push(element.genre);
         }
       });
-    }, 3000);
+    }, 1000);
   },
 };
 </script>

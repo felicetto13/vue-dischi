@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <LoaderPage></LoaderPage>
     <HeaderPage></HeaderPage>
     <MainContent></MainContent>
 
@@ -9,11 +10,13 @@
 <script>
 import MainContent from './components/MainContent.vue'
 import HeaderPage from './components/HeaderPage.vue'
+import LoaderPage from './components/LoaderPage.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderPage,MainContent,
+    LoaderPage,
   }
 }
 </script>
