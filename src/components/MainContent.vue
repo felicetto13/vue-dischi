@@ -1,11 +1,19 @@
 <template>
   <div class="main-content">
     <div class="container">
-        <select :class="{'show':cards.length >= counted}" name="filtro" id="filtro-genere">
-            <option v-for="genere in genderFinded" :key="genere" :value="genere">{{ genere }}</option>
-        </select>
+      <select
+        :class="{ show: cards.length >= counted }"
+        v-model="selectedOption"
+        name="filtro"
+        id="filtro-genere"
+      >
+        <option value="">All</option>
+        <option v-for="genere in genderFinded" :key="genere" :value="genere">
+          {{ genere }}
+        </option>
+      </select>
       <div class="row row-cols-5">
-        <div class="col" v-for="(card, i) in cards" :key="i">
+        <div class="col" v-for="(card, i) in filteredCard" :key="i">
           <CardElement :card-element="card"></CardElement>
         </div>
       </div>
@@ -23,30 +31,35 @@ export default {
     return {
       cards: [],
       genderFinded: [],
-      counted: null 
+      counted: null,
+      selectedOption: "",
     };
+  },
+  computed: {
+    filteredCard() {
+      
+        return this.cards.filter((element) => {
+          return element.genre.includes(this.selectedOption);
+        });
+      
+    },
   },
   mounted() {
     axios
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((axiosResp) => {
         const cardData = axiosResp.data.response;
-        this.counted = axiosResp.data.response.length
+        this.counted = axiosResp.data.response.length;
         this.cards = cardData;
       });
-      setTimeout(() => {
-          this.cards.forEach((element) =>{
-              if(!this.genderFinded.includes(element.genre)){
-                this.genderFinded.push(element.genre)
-              }
-              })
-      }, 3000) 
-      
+    setTimeout(() => {
+      this.cards.forEach((element) => {
+        if (!this.genderFinded.includes(element.genre)) {
+          this.genderFinded.push(element.genre);
+        }
+      });
+    }, 3000);
   },
-  methods:
-  {
-      
-  }
 };
 </script>
 
