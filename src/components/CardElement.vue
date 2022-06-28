@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="card">
       <img :src="cardElement.poster" :alt="cardElement.author" />
       <div class="card-body">
@@ -8,7 +7,6 @@
         <div class="card-year">{{ cardElement.year }}</div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

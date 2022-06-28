@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <LoaderPage></LoaderPage>
-    <HeaderPage></HeaderPage>
-    <MainContent></MainContent>
+    <LoaderPage :loadingState="statemantLoading"></LoaderPage>
+    <HeaderPage @searchDisk="searchDisk"></HeaderPage>
+    <MainContent :searchText="searchedDisk" @pageLoading="pageLoad"></MainContent>
 
   </div>
 </template>
@@ -17,12 +17,31 @@ export default {
   components: {
     HeaderPage,MainContent,
     LoaderPage,
+  },
+  data(){
+    return{
+      statemantLoading: false,
+      searchedDisk: "",
+    }
+  },
+  methods:
+  {
+    pageLoad(statement){
+      this.statemantLoading = statement;
+    },
+    searchDisk(text){
+      this.searchedDisk = text;
+    }
   }
 }
 </script>
 
 <style lang="scss">
 #app {
-  max-height: 100vh;
+  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 </style>

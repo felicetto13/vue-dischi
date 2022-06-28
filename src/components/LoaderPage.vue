@@ -1,5 +1,5 @@
 <template>
-  <div class="loader" :class="{ hidden: show == false }">
+  <div class="loader" :class="{ hidden: loadingState == true}">
     <div class="spinner-border text-success" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
@@ -8,16 +8,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      show: true,
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.show = false;
-    }, 5000);
-  },
+    props:
+    {
+        loadingState: Boolean
+    },
 };
 </script>
 
@@ -26,6 +20,8 @@ export default {
     position: relative;
     height: 100vh;
     display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
     background-color: #1e2d3b;
     align-content: center;
     justify-content: center;
